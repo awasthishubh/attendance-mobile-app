@@ -28,7 +28,7 @@ export default class App extends React.Component{
                     <Avatar
                         large
                         rounded
-                        source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"}}
+                        source={{uri: "https://api.adorable.io/avatars/285/17BIT0876.jpg"}}
                         onPress={() => console.log("Works!")}
                         activeOpacity={0.7}
                         style={{padding:10}}

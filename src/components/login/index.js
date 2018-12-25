@@ -1,8 +1,8 @@
 import React from 'react'
 import {Text, View, LayoutAnimation,Dimensions,Animated} from 'react-native'
 import {Button,Header,} from 'react-native-elements';
-import OrgLogin from './components/OrgLogin'
-import MemLogin from './components/MemLogin'
+import OrgLogin from './OrgLogin'
+import MemLogin from './MemLogin'
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class App extends React.Component{
@@ -11,7 +11,8 @@ export default class App extends React.Component{
         this.state={memScreen:null,
             XtrnsMem: new Animated.Value(Dimensions.get('window').width),
             XtrnsOrg: new Animated.Value(-1*Dimensions.get('window').width)}
-    }e(right){
+    }
+    swipe(right){
         width=Dimensions.get('window').width
         console.log(this.state.Xtrns)
         toValueMem=right==true?0:width

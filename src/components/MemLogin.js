@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import {Animated, View} from 'react-native'
 import { Slider,Card,FormInput,FormLabel, Avatar} from 'react-native-elements';
 
 export default class App extends React.Component{
@@ -9,7 +9,8 @@ export default class App extends React.Component{
     }
     render(){
         return(
-            <Card containerStyle={{justifyContent:'center', alignContent:'center', paddingTop:50,paddingBottom:50}}>
+            < Animated.View style={{position:'absolute', width:'100%', transform: [{ translateX: this.props.transformX }]}}>
+            <Card containerStyle={{justifyContent:'center', alignContent:'center', paddingTop:30,paddingBottom:30}}>
                 <View style={{flexDirection:'row', justifyContent:'center'}}>
                     <Avatar
                         large
@@ -40,6 +41,7 @@ export default class App extends React.Component{
                     />
                 </View>
             </Card>
+            </ Animated.View>
         )
     }
 }

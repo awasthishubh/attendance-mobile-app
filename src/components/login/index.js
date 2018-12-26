@@ -52,17 +52,17 @@ export default class App extends React.Component{
                     <Right />
                 </Header>
                 <GestureRecognizer 
-                    style={{flex: 1,backgroundColor: '#00ff00'}}
+                    style={{flex: 1,backgroundColor: '#00ff00', paddingLeft:30,paddingRight:30}}
                     gestureIsClickThreshold={3}
                     onSwipeLeft={()=>this.swipe(true)}
                     onSwipeRight={()=>this.swipe(false)}
                 >
                     <View style={{flex:1}} ></View>
                     <View style={{position:'relative'}}>
-                        <MemLogin transformX={this.state.XtrnsMem} opacity={console.log(111,this.state.XtrnsMem/Dimensions.get('window').width)}/>
+                        <MemLogin transformX={this.state.XtrnsMem}/>
                         <OrgLogin transformX={this.state.XtrnsOrg}/>
                     </View>
-                    <View style={{flex:7}} ></View>
+                    <View style={{flex:3}} ></View>
                 </GestureRecognizer>
                 <Footer>
                     <FooterTab>

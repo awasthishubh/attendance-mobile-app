@@ -1,6 +1,8 @@
 import React from 'react'
 import {Animated, View} from 'react-native'
-import { Slider,Card,FormInput,FormLabel, Avatar} from 'react-native-elements';
+// import { Slider,Card,FormInput,FormLabel, Avatar} from 'react-native-elements';
+import {Card,CardItem,Form, Label, Item, Input,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class App extends React.Component{
     constructor(props){
@@ -8,9 +10,10 @@ export default class App extends React.Component{
         this.state={value:0}
     }
     render(){
+        console.log(11111,this.props.transformX)
         return(
-            < Animated.View style={{position:'absolute', width:'100%', transform: [{ translateX: this.props.transformX }]}}>
-            <Card containerStyle={{justifyContent:'center', alignContent:'center', paddingTop:30,paddingBottom:30}}>
+            < Animated.View style={{position:'absolute', flex:1, width:'100%', transform: [{ translateX: this.props.transformX }]}}>
+            {/* <Card containerStyle={{justifyContent:'center', alignContent:'center', paddingTop:30,paddingBottom:30}}>
                 <View style={{flexDirection:'row', justifyContent:'center'}}>
                     <Avatar
                         large
@@ -40,7 +43,30 @@ export default class App extends React.Component{
                         placeholder='Enter your member ID'
                     />
                 </View>
-            </Card>
+            </Card> */}
+        <Card style={{flex: 1, paddingBottom:20, borderRadius:10}}>
+            <CardItem style={{flexDirection:'column', height:80}}>
+                <Thumbnail style={{position:'absolute',top:-80,height:150, width:150}} large  source={{uri: 'https://api.adorable.io/avatars/285/17BIT0319.jpg'}} />
+            </CardItem>
+            <CardItem>
+                <Content>
+                <Form>
+                    <Item rounded style={{marginBottom:10}}>
+                        <Label style={{marginLeft:10}}>
+                            <Icon name="group" size={30} color="#000000" style={{marginLeft:100}}/>
+                        </Label>
+                        <Input placeholder='Enter your organisation ID'/>
+                    </Item>
+                    <Item rounded>
+                        <Label style={{marginLeft:10}}>
+                            <Icon name="person" size={30} color="#000000" style={{marginLeft:100}}/>
+                        </Label>
+                        <Input placeholder='Enter your Member ID'/>
+                    </Item>
+                </Form>
+                </Content>
+            </CardItem>
+          </Card>
             </ Animated.View>
         )
     }

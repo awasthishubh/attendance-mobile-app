@@ -1,6 +1,7 @@
 import React from 'react'
-import OrgDash from './components/OrgDash'
+import MemDash from './components/MemDash'
+import Login from './components/login'
 
 export default ()=>{
-    return <OrgDash/>
+    return (<Login/>)
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Text, View, LayoutAnimation,Dimensions,Animated} from 'react-native'
-import {Button,Header,} from 'react-native-elements';
+import {LayoutAnimation,Dimensions,Animated} from 'react-native'
+import { View, Container, Header, Title, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import OrgLogin from './OrgLogin'
 import MemLogin from './MemLogin'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 export default class App extends React.Component{
     constructor(props){
@@ -20,15 +20,17 @@ export default class App extends React.Component{
         Animated.spring(
             this.state.XtrnsMem,
             {
-                duration: 200,  
+                duration: 1000,  
                 toValue: toValueMem,
+                useNativeDriver: true
             }
           ).start()
         Animated.spring(
             this.state.XtrnsOrg,
             {
-                duration: 500,  
+                duration: 1000,  
                 toValue: toValueOrg,
+                useNativeDriver: true
             }
           ).start()
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
@@ -41,37 +43,35 @@ export default class App extends React.Component{
     render(){
         console.log(this.state)
         return(
-            <View style={{flex:1}}>
-                <Header
-                    // outerContainerStyles={{shadowOffset: { width: 0, height: 0 },  
-                    //     shadowColor: 'black',  
-                    //     shadowOpacity: 1,  
-                    //     elevation: 3,  
-                    //     zIndex:999,
-                    // }}
-                    backgroundColor='#0044A9'
-                    centerComponent={{ text: 'Attendance App', style: { color: '#fff', fontSize:25 } }}
-                />
-                <GestureRecognizer style={{flex: 1,backgroundColor: '#00ff00'}} gestureIsClickThreshold={3}
+            <Container>
+                <Header>
+                    <Left/>
+                    <Body>
+                        <Title>Header</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <GestureRecognizer 
+                    style={{flex: 1,backgroundColor: '#00ff00'}}
+                    gestureIsClickThreshold={3}
                     onSwipeLeft={()=>this.swipe(true)}
                     onSwipeRight={()=>this.swipe(false)}
-                    >
+                >
                     <View style={{flex:1}} ></View>
                     <View style={{position:'relative'}}>
-                    {/* {this.loginComp()} */}
-                        <MemLogin transformX={this.state.XtrnsMem}/>
+                        <MemLogin transformX={this.state.XtrnsMem} opacity={console.log(111,this.state.XtrnsMem/Dimensions.get('window').width)}/>
                         <OrgLogin transformX={this.state.XtrnsOrg}/>
                     </View>
                     <View style={{flex:7}} ></View>
                 </GestureRecognizer>
-                <Button
-                    containerViewStyle={{marginLeft:0,marginRight:0}}
-                    raised
-                    icon={{name: 'send'}}
-                    title='Swipe to conntinue'
-                    backgroundColor='#0044A9'
-                />
-            </View>
+                <Footer>
+                    <FooterTab>
+                        <Button full>
+                        <Text>Footer</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
+            </Container>
         )
     }
 }

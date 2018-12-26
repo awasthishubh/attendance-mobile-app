@@ -1,6 +1,5 @@
 import React from 'react'
 import {Animated, View} from 'react-native'
-// import { Slider,Card,FormInput,FormLabel, Avatar} from 'react-native-elements';
 import {Card,CardItem,Form, Label, Item, Input,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -46,7 +45,7 @@ export default class App extends React.Component{
             </Card> */}
         <Card style={{flex: 1, paddingBottom:20, borderRadius:10}}>
             <CardItem style={{flexDirection:'column', height:80}}>
-                <Thumbnail style={{position:'absolute',top:-80,height:150, width:150}} large  source={{uri: 'https://api.adorable.io/avatars/285/17BIT0319.jpg'}} />
+                <Thumbnail style={{position:'absolute',top:-80,height:150, width:150}} large  source={{uri: 'https://awasthishubh.github.io/logos/app/user.png'}} />
             </CardItem>
             <CardItem>
                 <Content>

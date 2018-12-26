@@ -1,15 +1,18 @@
+import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator} from 'react-navigation'
+import LoginScreen from './components/login'
+import Home from './components/header'
 import React from 'react'
-import {Text, View,Dimensions,Animated} from 'react-native'
-import {Button,Header,} from 'react-native-elements';
-import Login from './components/login'
 
-export default class App extends React.Component{
-    constructor(props){
-        super(props)
+
+export default createAppContainer(createMaterialTopTabNavigator({
+    Home: Home,
+    Login: LoginScreen
+},{
+    shifting:true,
+    tabBarOptions:{
+        style:{
+            backgroundColor:'#0044A9'
+        }
     }
-    render(){
-        return (
-            <Login/>
-        )
-    }
-}
+    
+}))

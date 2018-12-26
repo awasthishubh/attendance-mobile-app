@@ -1,47 +1,70 @@
 import React from 'react'
 import {LayoutAnimation,Dimensions,Animated} from 'react-native'
-import { View, Container, Header, Title, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import {Thumbnail, View, Container, Header, Title, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import OrgLogin from './OrgLogin'
 import MemLogin from './MemLogin'
 import GestureRecognizer from 'react-native-swipe-gestures';
 
+FooterButton=function(props){
+    return(
+        <Button style={{width:'100%',alignItems:'center'}} onPress={props.onPress}>
+            <View style={{flex:1,alignItems:"center", width:'100%'}}><Text style={{color:'#fff'}}>{props.text}</Text></View>
+        </Button>
+    )
+}
+
 export default class App extends React.Component{
     constructor(props){
         super(props)
-        this.state={memScreen:null,
-            XtrnsMem: new Animated.Value(Dimensions.get('window').width),
-            XtrnsOrg: new Animated.Value(-1*Dimensions.get('window').width)}
+        this.state={
+            memScreen:null,
+            opacityMem: new Animated.Value(0),
+            opacityOrg: new Animated.Value(0),
+            memberView: null,
+            zOrg: 100,
+            zMem: 100,
+            createLob:null,
+            joinLob:null
+        }
     }
-    swipe(right){
-        width=Dimensions.get('window').width
-        console.log(this.state.Xtrns)
-        toValueMem=right==true?0:width
-        toValueOrg=right==true?-1*width:0
+    createLob(v){
+        this.setState({createLob:v})
+    }
+    joinLob(v){
+        this.setState({joinLob:v})
+    }
+    
+    butttonText(){
+        if(this.state.memberView===null) return <FooterButton/>
+        if(this.state.memberView===true) return <FooterButton text='Join Lobby' onPress={this.state.joinLob}/>
+        else return <FooterButton text='Create Lobby' onPress={this.state.createLob}/>
+    }
+    imgPress(i){
+        toMem=i?1:0
+        toOrg=i?0:1
+        this.setState({memberView:i})
+        this.setState({zOrg:i?100:1,zMem:i?1:100})
         Animated.spring(
-            this.state.XtrnsMem,
+            this.state.opacityMem,
             {
                 duration: 1000,  
-                toValue: toValueMem,
+                toValue: toMem,
                 useNativeDriver: true
             }
           ).start()
-        Animated.spring(
-            this.state.XtrnsOrg,
+          Animated.spring(
+            this.state.opacityOrg,
             {
                 duration: 1000,  
-                toValue: toValueOrg,
+                toValue: toOrg,
                 useNativeDriver: true
             }
           ).start()
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-        if(right==true){
-            this.setState({memScreen:true})
-        } else this.setState({memScreen:false})
-        console.log(this.state);
-        
     }
     render(){
-        console.log(this.state)
+        a=(Dimensions.get('window').width-45)/2-140
+        b=(Dimensions.get('window').width-45)/2
+        console.log(a)
         return(
             <Container>
                 <Header>
@@ -51,26 +74,33 @@ export default class App extends React.Component{
                     </Body>
                     <Right />
                 </Header>
-                <GestureRecognizer 
-                    style={{flex: 1,backgroundColor: '#00ff00', paddingLeft:30,paddingRight:30}}
-                    gestureIsClickThreshold={3}
-                    onSwipeLeft={()=>this.swipe(true)}
-                    onSwipeRight={()=>this.swipe(false)}
-                >
-                    <View style={{flex:1}} ></View>
+                <View style={{flex:1,paddingLeft:30,paddingRight:30}}>
+                    <View style={{flex:3, justifyContent:'center', alignItems:'center'}} >
+                            {(()=>{
+                                if(this.state.memberView===null) return<Text h2>Choose To Continue</Text>
+                                else return <Text/>
+                            })()}
+                        </View>
                     <View style={{position:'relative'}}>
-                        <MemLogin transformX={this.state.XtrnsMem}/>
-                        <OrgLogin transformX={this.state.XtrnsOrg}/>
-                    </View>
-                    <View style={{flex:3}} ></View>
-                </GestureRecognizer>
-                <Footer>
-                    <FooterTab>
-                        <Button full>
-                        <Text>Footer</Text>
+                        <Button onPress={()=>this.imgPress(false)} transparent  style={{height:120, width:120,zIndex:this.state.zMem,position:'absolute',top:-60,left:a}}>
+                            <Thumbnail style={{height:120, width:120}} large  source={{uri: 'https://awasthishubh.github.io/logos/app/team.png'}} />
                         </Button>
+                        <Button onPress={()=>this.imgPress(true)} transparent style={{height:120, width:120,zIndex:this.state.zOrg,position:'absolute',top:-60,left:b}}>
+                            <Thumbnail style={{height:120, width:120}} large  source={{uri: 'https://awasthishubh.github.io/logos/app/user.png'}} />
+                        </Button>
+                        <MemLogin send={this.joinLob.bind(this)} opacity={this.state.opacityMem} zIndex={this.state.zOrg}/>
+                        <OrgLogin send={this.createLob.bind(this)} opacity={this.state.opacityOrg} zIndex={this.state.zMem}/>
+                    </View>
+                    <View style={{flex:6}} />
+                </View>
+                {/* <Footer>
+                    <FooterTab>
+                    <Button block>
+            {this.butttonText()}
+          </Button>
                     </FooterTab>
-                </Footer>
+                </Footer> */}
+            {this.butttonText()}
             </Container>
         )
     }

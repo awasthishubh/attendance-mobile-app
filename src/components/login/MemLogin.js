@@ -6,61 +6,36 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default class App extends React.Component{
     constructor(props){
         super(props)
-        this.state={value:0}
+        this.state={mem:'shubh',org:'acm'}
+        this.props.send(()=>{
+            console.log('sdsd',this.state)
+            //Function to submit
+        })
     }
     render(){
-        console.log(11111,this.props.transformX)
+        console.log('mem',this.props.zIndex)
         return(
-            < Animated.View style={{position:'absolute', flex:1, width:'100%', transform: [{ translateX: this.props.transformX }]}}>
-            {/* <Card containerStyle={{justifyContent:'center', alignContent:'center', paddingTop:30,paddingBottom:30}}>
-                <View style={{flexDirection:'row', justifyContent:'center'}}>
-                    <Avatar
-                        large
-                        rounded
-                        source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"}}
-                        onPress={() => console.log("Works!")}
-                        activeOpacity={0.7}
-                        style={{padding:10}}
-                    />
-                </View>
-                <View style={{marginTop:10,
-                    shadowOffset: { width: 10, height: 10 },  
-                    shadowColor: 'black',  
-                    shadowOpacity: 1,  
-                    elevation: 3,  
-                    zIndex:999  }}>
-                    <FormLabel labelStyle={{textAlign:'center'}}>Organisation ID</FormLabel>
-                    <FormInput
-                        inputStyle={{textAlign:'center', borderBottomWidth: 2, borderBottomColor:'#f0f0f0',width:'100%'}}
-                        placeholder='Enter your organisation ID'
-                    />
-                </View>
-                <View style={{marginTop:10}}>
-                    <FormLabel labelStyle={{textAlign:'center'}}>Member ID</FormLabel>
-                    <FormInput
-                        inputStyle={{textAlign:'center', borderBottomWidth: 2, borderBottomColor:'#f0f0f0',width:'100%'}}
-                        placeholder='Enter your member ID'
-                    />
-                </View>
-            </Card> */}
-        <Card style={{flex: 1, paddingBottom:20, borderRadius:10}}>
-            <CardItem style={{flexDirection:'column', height:80}}>
-                <Thumbnail style={{position:'absolute',top:-80,height:150, width:150}} large  source={{uri: 'https://awasthishubh.github.io/logos/app/user.png'}} />
-            </CardItem>
-            <CardItem>
+            < Animated.View style={{zIndex:this.props.zIndex-2,position:'absolute', flex:1, width:'100%',shadowOpacity:0, opacity:this.props.opacity}}>
+        <Card transparent style={{backgroundColor:'rgba(0, 0, 0, 0.3)',flex: 1, paddingBottom:20, borderRadius:10}}>
+            <CardItem style={{flexDirection:'column', height:70, backgroundColor:'none'}} />
+            <CardItem style={{backgroundColor:'none'}}>
                 <Content>
                 <Form>
                     <Item rounded style={{marginBottom:10}}>
                         <Label style={{marginLeft:10}}>
                             <Icon name="group" size={30} color="#000000" style={{marginLeft:100}}/>
                         </Label>
-                        <Input placeholder='Enter your organisation ID'/>
+                        <Input placeholder='Enter your organisation ID'
+                            value={this.state.org}
+                            onChangeText={(org)=>this.setState({org})}/>
                     </Item>
                     <Item rounded>
                         <Label style={{marginLeft:10}}>
                             <Icon name="person" size={30} color="#000000" style={{marginLeft:100}}/>
                         </Label>
-                        <Input placeholder='Enter your Member ID'/>
+                        <Input placeholder='Enter your Member ID'
+                            value={this.state.mem}
+                            onChangeText={(mem)=>this.setState({mem})}/>
                     </Item>
                 </Form>
                 </Content>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, Text} from 'native-base'
 
 export default class app extends React.Component{
     render(){

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Body,Title,Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import { Container, Header, Body,Title, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
 import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'

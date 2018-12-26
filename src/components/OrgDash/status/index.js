@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, View,ListItem,Right,Header, Content, Card, Image, CardItem, Thumbnail, Text, Button, Icon, Left, Body} from 'native-base'
+import {Container, View,Content} from 'native-base'
 import StatDet from './detail'
 import ThrsDestance from './dist'
 

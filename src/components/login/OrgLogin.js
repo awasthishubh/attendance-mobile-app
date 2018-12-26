@@ -1,7 +1,7 @@
 import React from 'react'
 import {Slider,Animated} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Body,Card,CardItem,Form, Label, Item, Input,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import {Body,Card,CardItem,Form, Label, Item, Input, Content, Text,Right } from 'native-base';
 
 export default class App extends React.Component{
     constructor(props){

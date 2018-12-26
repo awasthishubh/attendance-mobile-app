@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, View,ListItem,Right,Header, Content, Card, Image, CardItem, Thumbnail, Text, Button, Icon, Left, Body} from 'native-base'
+import {Right, Card, CardItem, Text, Body} from 'native-base'
 import {Slider} from 'react-native'
 
 export default class app extends React.Component{

@@ -1,6 +1,6 @@
 import React from 'react'
-import {Animated, View} from 'react-native'
-import {Card,CardItem,Form, Label, Item, Input,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import {Animated} from 'react-native'
+import {Card,CardItem,Form, Label, Item, Input, Content } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class App extends React.Component{

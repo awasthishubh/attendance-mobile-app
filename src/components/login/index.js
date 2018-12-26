@@ -1,9 +1,8 @@
 import React from 'react'
-import {LayoutAnimation,Dimensions,Animated} from 'react-native'
-import {Thumbnail, View, Container, Header, Title, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import {Dimensions,Animated} from 'react-native'
+import {Thumbnail, View, Container, Header, Title, Button, Left, Right, Body, Text } from 'native-base';
 import OrgLogin from './OrgLogin'
 import MemLogin from './MemLogin'
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 FooterButton=function(props){
     return(

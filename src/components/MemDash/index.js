@@ -1,6 +1,6 @@
 import React from 'react'
 import {Alert} from 'react-native'
-import {Header, Container, Title, Body,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right, View } from 'native-base';
+import {Header, Container, Title, Body, Text, Footer, FooterTab, Left, Button,Right, View } from 'native-base';
 import Icon from 'react-native-vector-icons/Entypo';
 import Status from './Status'
 export default class app extends React.Component{

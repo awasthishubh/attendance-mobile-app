@@ -1,6 +1,5 @@
 import React from 'react'
-import {Card,CardItem,Header, Container, Title, Body,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
-import Icon from 'react-native-vector-icons/Entypo';
+import {Card,CardItem, Body,ListItem, Thumbnail, Content, Text, Right } from 'native-base';
 export default class app extends React.Component{
     constructor(){
         super()

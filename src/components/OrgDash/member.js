@@ -1,6 +1,6 @@
 import React from 'react'
 // import {View, Text} from 'native-base'
-import { Container, Separator, Body,List,ListItem, Thumbnail, Content, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import { Container, Separator, Body,List,ListItem, Thumbnail, Content, Text, Left,Right } from 'native-base';
 
 export default class app extends React.Component{
     constructor(props){

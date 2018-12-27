@@ -4,8 +4,15 @@ import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'
 import Icon from 'react-native-vector-icons/Entypo';
+import onEvent from '../../action/on'
+import {connect} from 'react-redux'
 
-export default class TabsExample extends Component {
+class OrgDash extends Component {
+    constructor(props){
+        super(props)
+        console.log(this.props)
+    }
+
     alertLogout(){
         Alert.alert(
             'Logout?',
@@ -51,3 +58,5 @@ export default class TabsExample extends Component {
     );
   }
 }
+
+export default connect(null,{onEvent})(OrgDash)

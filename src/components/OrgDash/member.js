@@ -1,12 +1,13 @@
 import React from 'react'
-// import {View, Text} from 'native-base'
 import { Container, Separator, Body,List,ListItem, Thumbnail, Content, Text, Left,Right } from 'native-base';
+import {connect} from 'react-redux'
 
-export default class app extends React.Component{
+class MembersView extends React.Component{
     constructor(props){
         super(props)
         this.data=[{name:'asd',dist:12},{name:'dfvd',dist:42},{name:'dvdb',dist:34},{name:'bng',dist:12}]
         this.errdata=[{name:'asd',dist:12},{name:'dfvd',dist:42},{name:'dvdb',dist:34},{name:'bng',dist:12}]
+        console.log(this.props)
     }
     renderList(item, tint){
         return(
@@ -42,3 +43,7 @@ export default class app extends React.Component{
         )
     }
 }
+function mapStateToProps(state){
+    return {members:state.members}
+}
+export default connect(mapStateToProps)(MembersView)

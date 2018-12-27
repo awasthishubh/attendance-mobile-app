@@ -4,7 +4,7 @@ import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'
 import Icon from 'react-native-vector-icons/Entypo';
-import onEvent from '../../action/on'
+import {onEvent} from '../../action/socket'
 import {connect} from 'react-redux'
 
 class OrgDash extends Component {
@@ -26,7 +26,6 @@ class OrgDash extends Component {
           )
     }
     render() {
-    // confirm("This is Card Header")
     return (
         <Container>
         <Header hasTabs noShadow >

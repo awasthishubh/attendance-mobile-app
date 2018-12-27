@@ -1,7 +1,10 @@
+// export default ()=>{
+
+// }
 import io from 'socket.io-client';
 const socket = io('https://attendance-socket.herokuapp.com');
 
-export function on (){
+export function onEvent (){
     return (dispatch)=>{
         console.log(dispatch)
         socket.on('newMem',function(data){
@@ -11,7 +14,7 @@ export function on (){
         socket.on('connectionErr', function(data){
             console.log(data)
         })
-        s
+        
         socket.on('connectionSucess', function(data){
             console.log(data)
         })
@@ -46,39 +49,73 @@ export function on (){
     }
 }
 
-export function admin(org, passwd, threshold,){
-    navigator.geolocation.getCurrentPosition(function(pos){
-        socket.emit('adminConnect',{
-            org, passwd, threshold, pos:{lat,lng}
+export function createLobby(org, threshold,lat,lng){
+    return (dispatch)=>{
+        navigator.geolocation.getCurrentPosition(function(pos){
+            socket.emit('adminConnect',{
+                org, passwd:'acm@vit123', threshold, 
+                pos:{
+                    lat:pos.coords.latitude,
+                    lng:pos.coords.longitude
+                }
+            }, function(err){
+                alert(err.message)
+            },{
+                enableHighAccuracy: false,
+                timeout: 5000,
+                maximumAge: 10000
+            })
         })
-    })
+    }
 }
 
-export function mem(org,reg,lat,lng){
-    navigator.geolocation.getCurrentPosition(function(pos){
-        socket.emit('memConnect',{
-            org, reg, pos:{ lat, lng}
+export function joinLobby(org,reg){
+    return (dispatch)=>{
+            navigator.geolocation.getCurrentPosition(function(pos){
+            socket.emit('memConnect',{
+                org, reg, 
+                pos:{
+                    lat:pos.coords.latitude,
+                    lng:pos.coords.longitude
+                }
+            })
+        }, function(err){
+            alert(err.message)
+        },{
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 10000
         })
-    })
+    }
 }
 
 export function doAttendance(){
-    socket.emit('markPresent')
+    return (dispatch)=>{
+        socket.emit('markPresent')
+    }
 }
 
 export function getMembers(){
-    socket.emit('allMem')
+    return (dispatch)=>{
+        socket.emit('allMem')
+    }
 }
 
 export function disconnect(){
-    socket.disconnect();
-    console.log('disconnected')
+    return (dispatch)=>{
+        socket.disconnect();
+        console.log('disconnected')
+    }
 }
 
 export function updatePos(lat,lng){
-    socket.emit('updatePos',{lat,lng})
+    return (dispatch)=>{
+        socket.emit('updatePos',{lat,lng})
+    }
 }
 
 export function updateThreshold(threshold){
-    socket.emit('updateThreshold',threshold)
+    return (dispatch)=>{
+        socket.emit('updateThreshold',threshold)
+    }
 }

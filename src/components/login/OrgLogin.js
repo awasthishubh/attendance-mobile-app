@@ -2,8 +2,10 @@ import React from 'react'
 import {Slider,Animated} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Body,Card,CardItem,Form, Label, Item, Input, Content, Text,Right } from 'native-base';
+import {createLobby} from '../../action/socket'
+import {connect} from 'react-redux'
 
-export default class App extends React.Component{
+class OrgLogin extends React.Component{
     constructor(props){
         super(props)
         this.state={thresholdDist:1, org:''}
@@ -11,6 +13,7 @@ export default class App extends React.Component{
         this.props.send(()=>{
             console.log('sdsd',this.state.thresholdDist)
             //Function to submit
+            this.props.createLobby(this.state.org,this.state.thresholdDist,71,71)
         })
     }
 
@@ -56,3 +59,5 @@ export default class App extends React.Component{
         )
     }
 }
+
+export default connect(null,{createLobby})(OrgLogin)

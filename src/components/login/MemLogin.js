@@ -2,14 +2,16 @@ import React from 'react'
 import {Animated} from 'react-native'
 import {Card,CardItem,Form, Label, Item, Input, Content } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {joinLobby} from '../../action/socket'
+import {connect} from 'react-redux'
 
-export default class App extends React.Component{
+class MemLogin extends React.Component{
     constructor(props){
         super(props)
         this.state={mem:'shubh',org:'acm'}
         this.props.send(()=>{
             console.log('sdsd',this.state)
-            //Function to submit
+            this.props.joinLobby(this.state.org,this.state.mem,71,71)
         })
     }
     render(){
@@ -45,3 +47,5 @@ export default class App extends React.Component{
         )
     }
 }
+
+export default connect(null,{joinLobby})(MemLogin)

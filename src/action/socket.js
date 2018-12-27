@@ -9,14 +9,32 @@ export function onEvent (){
         console.log(dispatch)
         socket.on('newMem',function(data){
             console.log(data.reg+' joined')
+            Toast.show({
+                text: data.reg+' joined',
+                buttonText: 'Okay'
+              })
         })
         
         socket.on('connectionErr', function(data){
             console.log(data)
+            alert(data)
+            dispatch({
+                type:'CHANGE_SCREEN', payload:null
+            })
         })
         
-        socket.on('connectionSucess', function(data){
+        socket.on('lobbyCreateSucess', function(data){
             console.log(data)
+            dispatch({
+                type:'CHANGE_SCREEN', payload:'ORG'
+            })
+        })
+
+        socket.on('lobbyJoinSucess', function(data){
+            console.log(data)
+            dispatch({
+                type:'CHANGE_SCREEN', payload:'MEM'
+            })
         })
         
         socket.on('userDis', function(data){
@@ -33,12 +51,14 @@ export function onEvent (){
         
         socket.on('status',(data)=>{
             console.log(data)
-            
         })
         
         socket.on('lobbyClosed',()=>{
             console.log('lobby Closed by admin')
             socket.disconnect()
+            dispatch({
+                type:'CHANGE_SCREEN', payload:null
+            })
         })
         
         socket.on('err',(err)=>{
@@ -105,6 +125,9 @@ export function disconnect(){
     return (dispatch)=>{
         socket.disconnect();
         console.log('disconnected')
+        dispatch({
+            type:'CHANGE_SCREEN', payload:null
+        })
     }
 }
 

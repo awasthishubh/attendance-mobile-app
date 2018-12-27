@@ -22,10 +22,20 @@ class app extends React.Component{
         this.props.onEvent()
     }
     render(){
-        return (
-                <Login/>
-            )
-        }
+        console.log(this.props)
+        if(this.props.viewState.screen==='MEM')
+            return <MemDash/>
+        else if(this.props.viewState.screen==='ORG')
+            return <OrgDash/>
+        else
+            return <Login/>
+    }
 }
 
-export default connect(null,{onEvent})(app)
+function mapStateToProps(state){
+    return({
+        viewState:state.viewState
+    })
+}
+
+export default connect(mapStateToProps,{onEvent})(app)

@@ -9,7 +9,11 @@ class OrgDashStatus extends React.Component{
         return(
         <Container>
         <Content style={{paddingTop:30,paddingRight:30,paddingLeft:30}}>
-          <StatDet org={this.props.orgState.status.organisation}/>
+          <StatDet 
+            org={this.props.orgState.status.organisation}
+            inRage={this.props.orgState.members.inRange.length}
+            ouOfRange={this.props.orgState.members.outOfRange.length}
+          />
           <ThrsDestance thrs={this.props.orgState.status.threshold} updateThrs={this.props.updateThreshold}/>
           <View style={{height:50}}/>
         </Content>

@@ -2,17 +2,18 @@
 
 // }
 import io from 'socket.io-client';
+import {Toast} from 'native-base'
 const socket = io('https://attendance-socket.herokuapp.com');
 
 export function onEvent (){
     return (dispatch)=>{
         console.log(dispatch)
         socket.on('newMem',function(data){
-            console.log(data.reg+' joined')
-            Toast.show({
-                text: data.reg+' joined',
-                buttonText: 'Okay'
-              })
+            // console.log(data.reg+' joined')
+            // Toast.show({
+            //     text: data.reg+' joined',
+            //     buttonText: 'Okay'
+            //   })
         })
         
         socket.on('connectionErr', function(data){
@@ -47,6 +48,17 @@ export function onEvent (){
         
         socket.on('allMem',(data)=>{
             console.log(data)
+            inRange=[]
+            outOfRange=[]
+            for(mem in data){
+                console.log()
+                if(data[mem].inRange) inRange.push(data[mem])
+                else outOfRange.push(data[mem])
+            }
+            console.log({inRange,outOfRange})
+            dispatch({
+                type:'ALL_MEMBERS', payload:{inRange,outOfRange}
+            })
         })
         
         socket.on('status',(data)=>{

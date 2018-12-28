@@ -13,14 +13,14 @@ class MembersView extends React.Component{
         return(
             <ListItem avatar>
                 <Left>
-                    <Thumbnail source={{ uri: `https://api.adorable.io/avatars/285/${item.name}.jpg` }} />
+                    <Thumbnail source={{ uri: `https://api.adorable.io/avatars/285/${item.reg}.jpg` }} />
                 </Left>
                 <Body style={{flexDirection:'row',paddingRight:20}}>
                     <Body>
-                        <Text>{item.name}</Text>
+                        <Text>{item.reg}</Text>
                     </Body>
                     <Right>
-                        <Text style={{color:tint}}>{item.dist}</Text>
+                        <Text style={{color:tint}}>{Math.round(item.dist* 100) / 100}m</Text>
                     </Right>
                 </Body>
             </ListItem>
@@ -33,17 +33,17 @@ class MembersView extends React.Component{
                     <Separator bordered>
                         <Text>In Range</Text>
                     </Separator>
-                    <List dataArray={this.data} renderRow={(i)=>this.renderList(i,'#00ff00')}/>
+                    <List dataArray={this.props.members.inRange} renderRow={(i)=>this.renderList(i,'#00ff00')}/>
                     <Separator bordered>
                         <Text>Out of Range</Text>
                     </Separator>
-                    <List dataArray={this.errdata} renderRow={(i)=>this.renderList(i,'#ff0000')}/>
+                    <List dataArray={this.props.members.outOfRange} renderRow={(i)=>this.renderList(i,'#ff0000')}/>
                 </Content>
             </Container>
         )
     }
 }
 function mapStateToProps(state){
-    return {members:state.members}
+    return {members:state.orgState.members}
 }
 export default connect(mapStateToProps)(MembersView)

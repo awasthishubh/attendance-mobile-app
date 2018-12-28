@@ -8,7 +8,7 @@ initStatus={
         lng:null,
         threshold:0
     },
-    members:[]
+    members:{inRange:[],outOfRange:[]}
 }
 
 export function orgState(state=initStatus, action){
@@ -17,6 +17,8 @@ export function orgState(state=initStatus, action){
             return {...state, status:action.payload}
         case 'UPDATE_THRS':
             return {...state, status:{...state.status, threshold:action.payload}}
+        case 'ALL_MEMBERS':
+            return {...state, members:action.payload}
         default:
             return state
     }

@@ -20,20 +20,17 @@ export function onEvent (){
             dispatch({
                 type:'CHANGE_SCREEN', payload:null
             })
+            dispatch({
+                type:'CHANGE_LOADING', payload:false
+            })
         })
         
         socket.on('lobbyCreateSucess', function(data){
-            console.log(data)
-            dispatch({
-                type:'CHANGE_SCREEN', payload:'ORG'
-            })
+            socket.emit('status')
         })
 
         socket.on('lobbyJoinSucess', function(data){
-            console.log(data)
-            dispatch({
-                type:'CHANGE_SCREEN', payload:'MEM'
-            })
+            socket.emit('status')
         })
         
         socket.on('userDis', function(data){
@@ -146,27 +143,39 @@ export function onEvent (){
 
 export function createLobby(org, threshold,lat,lng){
     return (dispatch)=>{
+        dispatch({
+            type:'CHANGE_LOADING', payload:'Fetching location...'
+        })
         navigator.geolocation.getCurrentPosition(function(pos){
+            dispatch({
+                type:'CHANGE_LOADING', payload:'Creating lobby...'
+            })
             socket.emit('adminConnect',{
-                org, passwd:'acm@vit123', threshold, 
+                org, threshold, 
                 pos:{
                     lat:pos.coords.latitude,
                     lng:pos.coords.longitude
                 }
-            }, function(err){
-                alert(err.message)
-            },{
-                enableHighAccuracy: false,
-                timeout: 5000,
-                maximumAge: 10000
             })
+        }, function(err){
+            alert(err.message)
+        },{
+            enableHighAccuracy: true,
+            timeout: 30000,
+            maximumAge: 5000
         })
     }
 }
 
 export function joinLobby(org,reg){
     return (dispatch)=>{
-            navigator.geolocation.getCurrentPosition(function(pos){
+        dispatch({
+            type:'CHANGE_LOADING', payload:'Fetching location...'
+        })
+        navigator.geolocation.getCurrentPosition(function(pos){
+            dispatch({
+                type:'CHANGE_LOADING', payload:'Joining lobby...'
+            })
             socket.emit('memConnect',{
                 org, reg, 
                 pos:{
@@ -177,9 +186,9 @@ export function joinLobby(org,reg){
         }, function(err){
             alert(err.message)
         },{
-            enableHighAccuracy: false,
-            timeout: 5000,
-            maximumAge: 10000
+            enableHighAccuracy: true,
+            timeout: 30000,
+            maximumAge: 5000
         })
     }
 }

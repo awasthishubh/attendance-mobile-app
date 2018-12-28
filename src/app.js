@@ -5,16 +5,7 @@ import OrgDash from './components/OrgDash'
 import {onEvent} from './action/socket'
 import {connect} from 'react-redux'
 import {Root} from 'native-base'
-
-navigator.geolocation.getCurrentPosition(function(pos){
-    console.log(pos)
-}, function(err){
-    alert(err.message)
-},{
-    enableHighAccuracy: false,
-    timeout: 12000,
-    maximumAge: 10000
-})
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class app extends React.Component{ 
     constructor(props){
@@ -34,17 +25,18 @@ class app extends React.Component{
     render(){
         return(
             <Root>
+                <Spinner
+                    visible={Boolean(this.props.viewState.loading)}
+                    textContent={String(this.props.viewState.loading)}
+                    textStyle={{color: '#FFF'}}
+                    size='large'
+                    />
                 {this.renderDash()}
             </Root>
         )
     }
 }
 
-// function mapStateToProps(state){
-//     return({
-//         state
-//     })
-// }
 function mapStateToProps(state){
     return state
 }

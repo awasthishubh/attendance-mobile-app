@@ -33,6 +33,7 @@ class OrgDash extends Component {
             <Left/>
             <Body>
                 <Title>Attendance App</Title>
+                <Text note>Organisation View</Text>
             </Body>
             <Right>
                 <Button transparent>

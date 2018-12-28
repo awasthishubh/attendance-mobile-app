@@ -157,6 +157,8 @@ export function onEvent (){
         socket.on('downloadCSV',(data)=>{
             console.log(data)
             Linking.openURL(url+data.url)
+            socket.emit('disconnectMe')
+            navigator.geolocation.stopObserving()
             dispatch({
                 type:'CHANGE_SCREEN', payload:null
             })
@@ -183,6 +185,15 @@ export function onEvent (){
 export function createLobby(org, threshold,lat,lng){
     return (dispatch)=>{
         getLocation(dispatch, function(pos){
+            if(pos.mocked==true) {
+                dispatch({
+                    type:'CHANGE_SCREEN', payload:null
+                })
+                dispatch({
+                    type:'CHANGE_LOADING', payload:null
+                })
+                return alert('Mocked location detected.')
+            }
             dispatch({
                 type:'CHANGE_LOADING', payload:'Creating lobby...'
             })
@@ -212,7 +223,7 @@ function getLocation(dispatch,callback){
             alert(err.message)
         })
     },{
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 30000,
         maximumAge: 5000
     })
@@ -221,6 +232,15 @@ function getLocation(dispatch,callback){
 export function joinLobby(org,reg){
     return (dispatch)=>{
         getLocation(dispatch, function(pos){
+            if(pos.mocked==true) {
+                dispatch({
+                    type:'CHANGE_SCREEN', payload:null
+                })
+                dispatch({
+                    type:'CHANGE_LOADING', payload:null
+                })
+                return alert('Mocked location detected.')
+            }
             dispatch({
                 type:'CHANGE_LOADING', payload:'Joining lobby...'
             })

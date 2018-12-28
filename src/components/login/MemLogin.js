@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 class MemLogin extends React.Component{
     constructor(props){
         super(props)
-        this.state={mem:'shubh',org:'acm'}
+        this.state={mem:'',org:''}
         this.props.send(()=>{
             console.log('sdsd',this.state)
             this.props.joinLobby(this.state.org,this.state.mem,71,71)

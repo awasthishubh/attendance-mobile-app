@@ -4,7 +4,7 @@ import Login from './components/login'
 import OrgDash from './components/OrgDash'
 import {onEvent} from './action/socket'
 import {connect} from 'react-redux'
-
+import {Root} from 'native-base'
 
 navigator.geolocation.getCurrentPosition(function(pos){
     console.log(pos)
@@ -21,7 +21,8 @@ class app extends React.Component{
         super(props)
         this.props.onEvent()
     }
-    render(){
+    renderDash(){
+        console.log(7878,this.props)
         console.log(this.props)
         if(this.props.viewState.screen==='MEM')
             return <MemDash/>
@@ -30,12 +31,22 @@ class app extends React.Component{
         else
             return <Login/>
     }
+    render(){
+        return(
+            <Root>
+                {this.renderDash()}
+            </Root>
+        )
+    }
 }
 
+// function mapStateToProps(state){
+//     return({
+//         state
+//     })
+// }
 function mapStateToProps(state){
-    return({
-        viewState:state.viewState
-    })
+    return state
 }
 
 export default connect(mapStateToProps,{onEvent})(app)

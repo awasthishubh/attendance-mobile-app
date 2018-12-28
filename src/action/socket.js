@@ -1,19 +1,17 @@
-// export default ()=>{
 
-// }
 import io from 'socket.io-client';
 import {Toast} from 'native-base'
-const socket = io('https://attendance-socket.herokuapp.com');
+var socket = io('https://attendance-socket.herokuapp.com');
 
 export function onEvent (){
     return (dispatch)=>{
         console.log(dispatch)
         socket.on('newMem',function(data){
-            // console.log(data.reg+' joined')
-            // Toast.show({
-            //     text: data.reg+' joined',
-            //     buttonText: 'Okay'
-            //   })
+            console.log(data.reg+' joined')
+            Toast.show({
+                text: data.reg+' joined',
+                buttonText: 'Okay'
+              })
         })
         
         socket.on('connectionErr', function(data){
@@ -40,6 +38,10 @@ export function onEvent (){
         
         socket.on('userDis', function(data){
             console.log(data)
+            Toast.show({
+                text: data.reg+' left',
+                buttonText: 'Okay'
+              })
         })
         
         socket.on('attDone',function(){
@@ -81,6 +83,7 @@ export function onEvent (){
                     dispatch({
                         type:'CHANGE_LOADING', payload:false
                     })
+                    
                 }
                 else if(data.type==='Member'){
                     dispatch({
@@ -88,6 +91,18 @@ export function onEvent (){
                     })
                     dispatch({
                         type:'CHANGE_LOADING', payload:false
+                    })
+                    dispatch({
+                        type:'ORG_STATUS', payload:{
+                            connected:data.connected,
+                            organisation:data.details.org,
+                            distance:data.dist,
+                            type:data.type,
+                            lat:data.details.pos.lat,
+                            lng:data.details.pos.lng,
+                            inRange:data.inRange,
+                            id:data.details.id
+                        }
                     })
                 }
             } else{
@@ -102,7 +117,7 @@ export function onEvent (){
         
         socket.on('lobbyClosed',()=>{
             console.log('lobby Closed by admin')
-            socket.disconnect()
+            socket.emit('disconnectMe')
             dispatch({
                 type:'CHANGE_SCREEN', payload:null
             })
@@ -112,7 +127,20 @@ export function onEvent (){
             console.log(err)
         })
 
-        
+        socket.on('disconnect', function(){
+            console.log(socket)
+            console.log(socket.socket)
+            console.log(socket.connect)
+            console.log(socket.reconnect)
+            socket = io('https://attendance-socket.herokuapp.com',{'forceNew':true });
+            onEvent()
+            dispatch({
+                type:'CHANGE_SCREEN', payload:null
+            })
+            dispatch({
+                type:'INITIAL_ORG_STATE', payload:null
+            })
+        })        
     }
 }
 
@@ -176,10 +204,13 @@ export function getMembers(){
 
 export function disconnect(){
     return (dispatch)=>{
-        socket.disconnect();
+        socket.emit('disconnectMe')
         console.log('disconnected')
         dispatch({
             type:'CHANGE_SCREEN', payload:null
+        })
+        dispatch({
+            type:'INITIAL_ORG_STATE', payload:null
         })
     }
 }

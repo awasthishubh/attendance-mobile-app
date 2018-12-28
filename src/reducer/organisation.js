@@ -1,5 +1,5 @@
 
-initStatus={
+initOrgStatus={
     status: {
         connected:null,
         organisation:'',
@@ -11,7 +11,7 @@ initStatus={
     members:{inRange:[],outOfRange:[]}
 }
 
-export function orgState(state=initStatus, action){
+export function orgState(state=initOrgStatus, action){
     switch(action.type){
         case 'ORG_STATUS':
             return {...state, status:action.payload}
@@ -19,6 +19,8 @@ export function orgState(state=initStatus, action){
             return {...state, status:{...state.status, threshold:action.payload}}
         case 'ALL_MEMBERS':
             return {...state, members:action.payload}
+        case 'INITIAL_ORG_STATE':
+            return initOrgStatus
         default:
             return state
     }

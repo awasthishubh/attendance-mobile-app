@@ -4,7 +4,7 @@ import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'
 import Icon from 'react-native-vector-icons/Entypo';
-import {getStatus} from '../../action/socket'
+import {getStatus,disconnect} from '../../action/socket' 
 import {connect} from 'react-redux'
 
 class OrgDash extends Component {
@@ -21,13 +21,12 @@ class OrgDash extends Component {
             'Are you sure you want to close lobby?',
             [
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'Close Lobby', onPress: () => console.log('Logged out')}
+              {text: 'Close Lobby', onPress: this.props.disconnect}
             ],
             { cancelable: false }
           )
     }
     render() {
-        console.log(this.props.orgState)
     return (
         <Container>
         <Header hasTabs noShadow >
@@ -37,7 +36,7 @@ class OrgDash extends Component {
             </Body>
             <Right>
                 <Button transparent>
-                    <Icon name="log-out" size={30} color="#ffff" onPress={this.alertLogout}/>
+                    <Icon name="log-out" size={30} color="#ffff" onPress={this.alertLogout.bind(this)}/>
                 </Button>
             </Right>
         </Header>
@@ -61,10 +60,4 @@ class OrgDash extends Component {
   }
 };
 
-function mapStateToProps(state){
-    return{
-        orgState:state.orgState
-    }
-}
-
-export default connect(mapStateToProps,{getStatus})(OrgDash)
+export default connect(null,{getStatus,disconnect})(OrgDash)

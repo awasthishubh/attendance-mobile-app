@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import {orgState} from './organisation'
+import {memState} from './member'
 
 export function viewState(state={screen:null, loading:false}, action){
     console.log(action,state)
@@ -13,8 +14,9 @@ export function viewState(state={screen:null, loading:false}, action){
     }
 }
 
-
+console.log(orgState);
+console.log(memState);
 
 export default combineReducers({
-    viewState,orgState
+    viewState,orgState,memState
 })

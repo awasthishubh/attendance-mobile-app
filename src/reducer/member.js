@@ -1,10 +1,23 @@
-export function members (){
-    return [{name:'asd',dist:12},{name:'dfvd',dist:42},{name:'dvdb',dist:34},{name:'bng',dist:12}]
+initMemStatus={
+    connected:null,
+    organisation:'',
+    distance:null,
+    type:'',
+    lat:null,
+    lng:null,
+    inRange:null,
+    id:null
 }
 
-export function viewState(state=null, action){
+export function memState(state=initMemStatus, action){
     switch(action.type){
-        case 'CHANGE_MEM_VIEW':
-            return action.payload
+        case 'ORG_STATUS':
+            return {...state, ...action.payload}
+        case 'UPDATE_MEM_POS':
+            return {...state}
+        case 'INITIAL_MEM_STATE':
+            return initMemStatus
+        default:
+            return state
     }
 }

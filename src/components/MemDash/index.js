@@ -3,14 +3,24 @@ import {Alert} from 'react-native'
 import {Header, Container, Title, Body, Text, Footer, FooterTab, Left, Button,Right, View } from 'native-base';
 import Icon from 'react-native-vector-icons/Entypo';
 import Status from './Status'
-export default class app extends React.Component{
+import {getStatus,disconnect} from '../../action/socket'
+import {connect} from 'react-redux'
+
+class MemDash extends React.Component{
+    constructor(props){
+        super(props)
+        // console.log(this.props)
+    }
+    componentWillMount(){
+        this.props.getStatus()
+    }
     alertLogout(){
         Alert.alert(
             'Logout?',
             'Are you sure you want to close lobby?',
             [
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'Exit Lobby', onPress: () => console.log('Logged out')}
+              {text: 'Exit Lobby', onPress: this.props.disconnect}
             ],
             { cancelable: false }
           )
@@ -26,7 +36,7 @@ export default class app extends React.Component{
             </Body>
             <Right>
                 <Button transparent>
-                    <Icon name="log-out" size={30} color="#ffff" onPress={this.alertLogout}/>
+                    <Icon name="log-out" size={30} color="#ffff" onPress={this.alertLogout.bind(this)}/>
                 </Button>
             </Right>
         </Header>
@@ -44,3 +54,5 @@ export default class app extends React.Component{
         )
     }
 }
+
+export default connect(null,{getStatus,disconnect})(MemDash)

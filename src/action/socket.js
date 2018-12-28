@@ -51,6 +51,41 @@ export function onEvent (){
         
         socket.on('status',(data)=>{
             console.log(data)
+            if(data.connected){
+                if(data.type==='Admin'){
+                    dispatch({
+                        type:'CHANGE_SCREEN', payload:'ORG'
+                    })
+                    dispatch({
+                        type:'ORG_STATUS', payload:{
+                            connected:data.connected,
+                            organisation:data.details.org,
+                            threshold:data.dist,
+                            type:data.type,
+                            lat:data.details.pos.lat,
+                            lng:data.details.pos.lng
+                        }
+                    })
+                    dispatch({
+                        type:'CHANGE_LOADING', payload:false
+                    })
+                }
+                else if(data.type==='Member'){
+                    dispatch({
+                        type:'CHANGE_SCREEN', payload:'MEM'
+                    })
+                    dispatch({
+                        type:'CHANGE_LOADING', payload:false
+                    })
+                }
+            } else{
+                dispatch({
+                    type:'CHANGE_SCREEN', payload:null
+                })
+                dispatch({
+                    type:'CHANGE_LOADING', payload:false
+                })
+            }
         })
         
         socket.on('lobbyClosed',()=>{
@@ -109,6 +144,12 @@ export function joinLobby(org,reg){
     }
 }
 
+export function getStatus(){
+    return (dispatch)=>{
+        socket.emit('status')
+    }
+}
+
 export function doAttendance(){
     return (dispatch)=>{
         socket.emit('markPresent')
@@ -140,5 +181,8 @@ export function updatePos(lat,lng){
 export function updateThreshold(threshold){
     return (dispatch)=>{
         socket.emit('updateThreshold',threshold)
+        dispatch({
+            type:'UPDATE_THRS', payload:threshold
+        })
     }
 }

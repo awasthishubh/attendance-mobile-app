@@ -15,7 +15,7 @@ export default class app extends React.Component{
               <Card>
                 <CardItem header bordered>
                     <Body><Text>Threshold Distance</Text></Body>
-                    <Right><Text>{this.state.thresholdDist}m</Text></Right>
+                    <Right><Text>{this.props.thrs}m</Text></Right>
                   
                 </CardItem>
                 <CardItem bordered>
@@ -25,9 +25,9 @@ export default class app extends React.Component{
                             step={1}
                             minimumValue={1}
                             maximumValue={100}
-                            value={this.state.thresholdDist}
-                            onValueChange={val => this.setState({ thresholdDist: val })}
-                            onSlidingComplete={ val => this.getVal(val)}
+                            value={this.props.thrs}
+                            // onValueChange={this.props.updateThrs}
+                            onSlidingComplete={this.props.updateThrs}
                         />
                     </Body>
                 </CardItem>

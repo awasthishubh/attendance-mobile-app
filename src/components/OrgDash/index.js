@@ -4,16 +4,17 @@ import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'
 import Icon from 'react-native-vector-icons/Entypo';
-import {onEvent} from '../../action/socket'
+import {getStatus} from '../../action/socket'
 import {connect} from 'react-redux'
 
 class OrgDash extends Component {
     constructor(props){
         super(props)
-        console.log(this.props)
-        this.props.onEvent()
+        // console.log(this.props)
     }
-
+    componentWillMount(){
+        this.props.getStatus()
+    }
     alertLogout(){
         Alert.alert(
             'Logout?',
@@ -26,6 +27,7 @@ class OrgDash extends Component {
           )
     }
     render() {
+        console.log(this.props.orgState)
     return (
         <Container>
         <Header hasTabs noShadow >
@@ -57,6 +59,12 @@ class OrgDash extends Component {
       </Container>
     );
   }
+};
+
+function mapStateToProps(state){
+    return{
+        orgState:state.orgState
+    }
 }
 
-export default connect(null,{onEvent})(OrgDash)
+export default connect(mapStateToProps,{getStatus})(OrgDash)

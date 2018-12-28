@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-// import Member from './member'
+import {orgState} from './organisation'
 
 export function viewState(state={screen:null, loading:false}, action){
     console.log(action,state)
@@ -13,6 +13,8 @@ export function viewState(state={screen:null, loading:false}, action){
     }
 }
 
+
+
 export default combineReducers({
-    viewState
+    viewState,orgState
 })

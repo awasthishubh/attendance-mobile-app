@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Body,Title, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
+import { Container, View,Header, Body,Title, Text, Footer, FooterTab, Tab, Left, Button,Tabs,Right } from 'native-base';
 import {Alert}  from 'react-native'
 import Members from './member'
 import Status from './status'
 import Icon from 'react-native-vector-icons/Entypo';
-import {getStatus,disconnect} from '../../action/socket' 
+import {getStatus,disconnect,doAttendance} from '../../action/socket' 
 import {connect} from 'react-redux'
 
 class OrgDash extends Component {
@@ -41,23 +41,19 @@ class OrgDash extends Component {
             </Right>
         </Header>
         <Tabs noShadow>
-            <Tab heading="Tab1">
+            <Tab heading="Status">
                 <Status />
             </Tab>
-            <Tab heading="Tab2">
+            <Tab heading="Members">
                 <Members />
             </Tab>
         </Tabs>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <Button style={{width:'100%',alignItems:'center'}} onPress={this.props.doAttendance}>
+            <View style={{flex:1,alignItems:"center", width:'100%'}}><Text style={{color:'#fff'}}>{'Take Attendance'}</Text></View>
+        </Button>
       </Container>
     );
   }
 };
 
-export default connect(null,{getStatus,disconnect})(OrgDash)
+export default connect(null,{getStatus,disconnect,doAttendance})(OrgDash)

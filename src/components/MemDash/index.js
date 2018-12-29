@@ -27,7 +27,7 @@ class MemDash extends React.Component{
     }
     render(){
         return(
-            <Container>
+            <Container style={{backgroundColor:'#e0e0e0'}}>
         <Header>
             <Left/>
             <Body>

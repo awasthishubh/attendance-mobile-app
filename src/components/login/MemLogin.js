@@ -18,24 +18,30 @@ class MemLogin extends React.Component{
         console.log('mem',this.props.zIndex)
         return(
             < Animated.View style={{zIndex:this.props.zIndex-2,position:'absolute', flex:1, width:'100%',shadowOpacity:0, opacity:this.props.opacity}}>
-        <Card transparent style={{backgroundColor:'rgba(0, 0, 0, 0.3)',flex: 1, paddingBottom:20, borderRadius:10}}>
+        <Card transparent={this.props.trns} style={{backgroundColor:'#fff' ,flex: 1, paddingBottom:20, borderRadius:10}}>
             <CardItem style={{flexDirection:'column', height:70, backgroundColor:'none'}} />
             <CardItem style={{backgroundColor:'none'}}>
                 <Content>
                 <Form>
-                    <Item rounded style={{marginBottom:10}}>
-                        <Label style={{marginLeft:10}}>
-                            <Icon name="group" size={30} color="#000000" style={{marginLeft:100}}/>
+                    <Item rounded style={{marginBottom:10, 
+                        borderColor :'#000',borderTopWidth:2,borderRightWidth:2,borderLeftWidth:2, borderBottomWidth:2 }}>
+                        <Label style={{marginLeft:10, color:'#000'}}>
+                            <Icon name="group" size={30} color="#000" style={{marginLeft:100}}/>
                         </Label>
                         <Input placeholder='Enter your organisation ID'
+                            // placeholderTextColor="#e0e0e0"
+                            textStyle={{ color: "#000" }}
                             value={this.state.org}
-                            onChangeText={(org)=>this.setState({org})}/>
+                            onChangeText={(org)=>this.setState({org})}
+                            style={{color : "#000"}}/>
                     </Item>
-                    <Item rounded>
+                    <Item rounded style={{borderColor :'#000',borderTopWidth:2,borderRightWidth:2,borderLeftWidth:2, borderBottomWidth:2 }}>
                         <Label style={{marginLeft:10}}>
-                            <Icon name="person" size={30} color="#000000" style={{marginLeft:100}}/>
+                            <Icon name="person" size={30} color="#000" style={{marginLeft:100}}/>
                         </Label>
                         <Input placeholder='Enter your Member ID'
+                            // placeholderTextColor="#e0e0e0"
+                            style={{color : "#000"}}
                             value={this.state.mem}
                             onChangeText={(mem)=>this.setState({mem})}/>
                     </Item>

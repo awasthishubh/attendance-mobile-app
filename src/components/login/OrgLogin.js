@@ -21,17 +21,19 @@ class OrgLogin extends React.Component{
         console.log('org',this.props.zIndex)
         return(
             < Animated.View style={{zIndex:this.props.zIndex-2,position:'absolute', flex:1, width:'100%', shadowOpacity:0,opacity:this.props.opacity}}>
-            <Card transparent style={{backgroundColor:'rgba(0, 0, 0, 0.3)',flex: 1, paddingBottom:20, borderRadius:10}}>
+            <Card transparent={this.props.trns} style={{/*backgroundColor:'rgba(0, 0, 0, 0.3)',*/flex: 1, paddingBottom:20, borderRadius:10}}>
                 <CardItem style={{backgroundColor:'none',flexDirection:'column', height:70}}>
                 </CardItem>
                 <CardItem style={{backgroundColor:'none'}}>
                     <Content>
                     <Form>
-                        <Item rounded style={{marginBottom:10}}>
+                        <Item rounded style={{marginBottom:10,marginBottom:10, borderColor :'#000',borderTopWidth:2,borderRightWidth:2,borderLeftWidth:2, borderBottomWidth:2 }}>
                             <Label style={{marginLeft:10}}>
-                                <Icon name="group" size={30} color="#000000" style={{marginLeft:100}}/>
+                                <Icon name="group" size={30} color="#000" style={{marginLeft:100}}/>
                             </Label>
                             <Input placeholder='Enter your organisation ID' 
+                                // placeholderTextColor="#e0e0e0"
+                                style={{ color: "#000" }}
                                 value={this.state.org}
                                 onChangeText={(org)=>this.setState({org})}/>
                         </Item>
@@ -39,17 +41,19 @@ class OrgLogin extends React.Component{
                     </Content>
                 </CardItem>
                 <CardItem style={{backgroundColor:'none'}}>
-                    <Body><Text>Threshold Distance</Text></Body>
-                    <Right><Text>{this.state.thresholdDist} meters</Text></Right>
+                    <Body><Text style={{ color: "#000" }}>Threshold Distance</Text></Body>
+                    <Right><Text style={{ color: "#000" }}>{this.state.thresholdDist} meters</Text></Right>
                 </CardItem >
                 <CardItem style={{backgroundColor:'none'}}>
 
                         <Slider
-                            style={{ width: '100%'}}
+                            style={{ width: '100%', color:'#000'}}
                             step={1}
                             minimumValue={1}
                             maximumValue={100}
                             value={this.state.thresholdDist}
+                            maximumTrackTintColor='#000'  
+                            minimumTrackTintColor='#000'
                             onValueChange={val => this.setState({ thresholdDist: val })}
                             // onSlidingComplete={ val => this.getVal(val)}
                         />

@@ -12,7 +12,7 @@ class OrgDashStatus extends React.Component{
     render(){
       console.log(222,this.props)
         return(
-        <Container>
+        <Container style={{backgroundColor:'#e0e0e0'}}>
         <Content style={{paddingTop:30,paddingRight:30,paddingLeft:30}}>
           <StatDet 
             org={this.props.orgState.status.organisation}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Separator, Body,List,ListItem, Thumbnail, Content, Text, Left,Right } from 'native-base';
+import {LayoutAnimation} from 'react-native'
 import {connect} from 'react-redux'
 
 class MembersView extends React.Component{
@@ -8,6 +9,9 @@ class MembersView extends React.Component{
         this.data=[{name:'asd',dist:12},{name:'dfvd',dist:42},{name:'dvdb',dist:34},{name:'bng',dist:12}]
         this.errdata=[{name:'asd',dist:12},{name:'dfvd',dist:42},{name:'dvdb',dist:34},{name:'bng',dist:12}]
         console.log(this.props)
+    }
+    componentWillUpdate(){
+        LayoutAnimation.spring()
     }
     renderList(item, tint){
         return(

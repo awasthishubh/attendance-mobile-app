@@ -28,7 +28,7 @@ class OrgDash extends Component {
     }
     render() {
     return (
-        <Container>
+        <Container style={{backgroundColor:'#e0e0e0'}}>
         <Header hasTabs noShadow >
             <Left/>
             <Body>
@@ -42,7 +42,7 @@ class OrgDash extends Component {
             </Right>
         </Header>
         <Tabs noShadow>
-            <Tab heading="Status">
+            <Tab heading="Status" style={{backgroundColor:'#e0e0e0'}}>
                 <Status />
             </Tab>
             <Tab heading="Members">
